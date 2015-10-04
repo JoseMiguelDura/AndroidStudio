@@ -3,6 +3,7 @@ package com.dam.josemiguel.myapplication;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +13,9 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.SeekBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -23,7 +27,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private CheckBox checkB2;
     private ListView lView;
     private String listViewText;
-    final String[] datos={"Patata","Agustin","Javi","Alcachofa"};
+    private TextView textVSB;
+    private SeekBar seekB;
+    final String[] datos={"Patata","Agustin","Javi"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,10 +51,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         lView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> a, View v, int position, long id) {
-                listViewText=a.getItemAtPosition(position).toString();
+                listViewText = a.getItemAtPosition(position).toString();
             }
         });
+        textVSB=(TextView)findViewById(R.id.textView5);
+        seekB=(SeekBar) findViewById(R.id.seekBar);
+        textVSB.setText("0");
 
+        seekB.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            private Toast toastStart = Toast.makeText(MainActivity.this, getText(R.string.start), Toast.LENGTH_SHORT);
+            private Toast toastStop = Toast.makeText(MainActivity.this, getText(R.string.stop), Toast.LENGTH_SHORT);
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
+            {
+                textVSB.setText(progress + 1 + "");
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar arg0)
+            {
+                toastStop.cancel();
+                toastStart.setGravity(Gravity.TOP|Gravity.LEFT, 60, 110);
+                toastStart.show();
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar arg0)
+            {
+                toastStart.cancel();
+                toastStop.setGravity(Gravity.TOP|Gravity.RIGHT, 60, 110);
+                toastStop.show();
+            }
+        });
 
     }
 
@@ -122,6 +158,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         bundle.putString("checkBox1",checkBox1);
         bundle.putString("checkBox2",checkBox2);
         bundle.putString("listView",listViewText);
+        bundle.putString("seekBar",textVSB.getText().toString());
         intent.putExtras(bundle);
         startActivity(intent);
 

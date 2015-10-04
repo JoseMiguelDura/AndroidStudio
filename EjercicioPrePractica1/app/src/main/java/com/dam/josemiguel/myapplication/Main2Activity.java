@@ -14,6 +14,7 @@ public class Main2Activity extends AppCompatActivity {
     private TextView tv2;
     private TextView tv3;
     private TextView tv4;
+    private TextView tv5;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,11 +23,14 @@ public class Main2Activity extends AppCompatActivity {
         tv2=(TextView) findViewById(R.id.textView2);
         tv3=(TextView) findViewById(R.id.textView3);
         tv4=(TextView) findViewById(R.id.textView4);
+        tv5=(TextView) findViewById(R.id.textView6);
         Bundle bundle=this.getIntent().getExtras();
         tv1.setText(bundle.getString("radioGroup")+":RadioGroup");
         tv2.setText(bundle.getString("checkBox1")+":CheckBox1");
         tv3.setText(bundle.getString("checkBox2")+":CheckBox2");
         tv4.setText(bundle.getString("listView")+":ListView");
+        tv5.setText(bundle.getString("seekBar")+":SeekBar");
+
 
     }
 
