@@ -60,9 +60,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         seekB.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
-            private Toast toastStart = Toast.makeText(MainActivity.this, getText(R.string.start), Toast.LENGTH_SHORT);
-            private Toast toastStop = Toast.makeText(MainActivity.this, getText(R.string.stop), Toast.LENGTH_SHORT);
-
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
             {
@@ -72,17 +69,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             @Override
             public void onStartTrackingTouch(SeekBar arg0)
             {
-                toastStop.cancel();
-                toastStart.setGravity(Gravity.TOP|Gravity.LEFT, 60, 110);
-                toastStart.show();
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar arg0)
             {
-                toastStart.cancel();
-                toastStop.setGravity(Gravity.TOP|Gravity.RIGHT, 60, 110);
-                toastStop.show();
             }
         });
 
